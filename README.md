@@ -16,7 +16,10 @@ The app can be installed on both Android and iOS devices. Follow the steps below
 2. Use the [Sideloadly](https://sideloadly.io/) app to install the `.ipa` on your iOS device.
 
 ## Screenshot
-![App Screenshot](screenshot.png)
+
+<div align="center" style="display:flex; justify-content:center; align-items:center; gap: 10px;">
+   <img src="screenshot.png" width="250" alt="Toman">
+</div>
 
 ## Releases
 You can download the latest version of the app for Android and iOS from the links below:
