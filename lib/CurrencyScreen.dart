@@ -249,7 +249,7 @@ class _CurrencyScreenState extends State<CurrencyScreen> {
       case 'دینار کویت':
         return '🇰🇼';
       case 'دینار بحرین':
-        return '🇧ahr';
+        return '🇧🇭';
       case 'رینگیت مالزی':
         return '🇲🇾';
       case 'بات تایلند':
