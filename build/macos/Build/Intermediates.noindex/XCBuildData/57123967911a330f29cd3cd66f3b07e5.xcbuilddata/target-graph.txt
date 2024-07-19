@@ -1,0 +1,20 @@
+Target dependency graph (7 targets)
+Target 'Runner' in project 'Runner'
+➜ Explicit dependency on target 'Flutter Assemble' in project 'Runner'
+➜ Implicit dependency on target 'Pods-Runner' in project 'Pods' via file 'Pods_Runner.framework' in build phase 'Link Binary'
+➜ Implicit dependency on target 'flutter_local_notifications' in project 'Pods' via options '-framework flutter_local_notifications' in build setting 'OTHER_LDFLAGS'
+➜ Implicit dependency on target 'shared_preferences_foundation' in project 'Pods' via options '-framework shared_preferences_foundation' in build setting 'OTHER_LDFLAGS'
+Target 'Pods-Runner' in project 'Pods'
+➜ Explicit dependency on target 'FlutterMacOS' in project 'Pods'
+➜ Explicit dependency on target 'flutter_local_notifications' in project 'Pods'
+➜ Explicit dependency on target 'shared_preferences_foundation' in project 'Pods'
+Target 'Flutter Assemble' in project 'Runner'
+➜ Implicit dependency on target 'flutter_local_notifications' in project 'Pods' via options '-framework flutter_local_notifications' in build setting 'OTHER_LDFLAGS'
+➜ Implicit dependency on target 'shared_preferences_foundation' in project 'Pods' via options '-framework shared_preferences_foundation' in build setting 'OTHER_LDFLAGS'
+Target 'shared_preferences_foundation' in project 'Pods'
+➜ Explicit dependency on target 'FlutterMacOS' in project 'Pods'
+➜ Explicit dependency on target 'shared_preferences_foundation-shared_preferences_foundation_privacy' in project 'Pods'
+Target 'shared_preferences_foundation-shared_preferences_foundation_privacy' in project 'Pods' (no dependencies)
+Target 'flutter_local_notifications' in project 'Pods'
+➜ Explicit dependency on target 'FlutterMacOS' in project 'Pods'
+Target 'FlutterMacOS' in project 'Pods' (no dependencies)
