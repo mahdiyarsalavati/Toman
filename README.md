@@ -1,4 +1,7 @@
 # Toman
+<div align="center" style="display:flex; justify-content:center; align-items:center; gap: 10px;">
+   <img src="icon.png" width="250" alt="Toman">
+</div>
 
 ## Overview
 Toman is a mobile application developed using Dart. It provides real-time currency conversion rates, focusing primarily on the value of Toman against other global currencies. The app fetches data from [TGJU](https://www.tgju.org/currency) to ensure up-to-date and accurate exchange rates.
