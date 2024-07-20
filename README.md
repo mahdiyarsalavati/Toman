@@ -10,12 +10,12 @@ Toman is a mobile application developed using Dart. It provides real-time curren
 The app can be installed on both Android and iOS devices. Follow the steps below to install the app on your device.
 
 ### Android
-1. Visit the [Releases](#releases) section.
+1. Visit the [Releases](https://github.com/mahdiyarsalavati/Toman/releases/tag/v1.0.2) section.
 2. Download the `.apk` file.
 3. Open the file to install the app on your Android device. You may need to allow installation from unknown sources.
 
 ### iOS
-1. Download the `.ipa` file from the [Releases](#releases) section.
+1. Download the `.ipa` file from the [Releases](https://github.com/mahdiyarsalavati/Toman/releases/tag/v1.0.2) section.
 2. Use the [Sideloadly](https://sideloadly.io/) app to install the `.ipa` on your iOS device.
 
 ## Screenshot
@@ -26,7 +26,7 @@ The app can be installed on both Android and iOS devices. Follow the steps below
 
 ## Releases
 You can download the latest version of the app for Android and iOS from the links below:
-- [Releases](#releases)
+- [Releases](https://github.com/mahdiyarsalavati/Toman/releases/tag/v1.0.2)
 
 ## Contact
 Mahdiyar Salavati - [mahdiyarultra@gmail.com](mailto:mahdiyarultra@gmail.com)
