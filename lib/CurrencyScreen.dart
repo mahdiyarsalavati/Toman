@@ -1,11 +1,11 @@
 import 'dart:convert';
-import 'package:flutter/cupertino.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:http/http.dart' as http;
-import 'package:shamsi_date/shamsi_date.dart';
 import 'package:intl/intl.dart';
+import 'package:shamsi_date/shamsi_date.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 import 'fetchService.dart';
 
 class CurrencyScreen extends StatefulWidget {
@@ -32,39 +32,31 @@ class _CurrencyScreenState extends State<CurrencyScreen> {
       isFirstLoad = true;
     });
     try {
-      final response = await http.get(
-        Uri.parse('https://www.tgju.org/currency'),
-        headers: {
-          'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36',
-        },
-      );
-      if (response.statusCode == 200) {
-        var data = fetchService.parseData(response.body);
+      var data =
+          await FetchService.fetchAndParseData('https://www.tgju.org/currency');
 
-        setState(() {
-          allCurrencies = data.asMap().entries.map((entry) {
-            int index = entry.key;
-            var currencyData = entry.value;
-            var price = currencyData['price'];
-            var change = currencyData['change'];
-            var changeValue = parseChangeValue(change);
-            return Currency(
-              index,
-              currencyData['country'],
-              currencyData['name'],
-              price,
-              changeValue,
-              getCurrencyEmoji(currencyData['name']),
-            );
-          }).toList();
-          updateCurrencyLists();
-        });
+      setState(() {
+        allCurrencies = [];
+        for (int i = 0; i < data.length; i++) {
+          var currencyData = data[i];
+          var price = currencyData['price'];
+          var change = currencyData['change'];
+          var changeValue = parseChangeValue(change);
+          var currency = Currency(
+            i,
+            currencyData['country'],
+            currencyData['name'],
+            price,
+            changeValue,
+            getCurrencyEmoji(currencyData['name']),
+          );
+          allCurrencies.add(currency);
+        }
+        updateCurrencyLists();
+      });
 
-        updateLastUpdatedTime();
-        savePreferences();
-      } else {
-        throw Exception('خطا: ${response.statusCode}');
-      }
+      updateLastUpdatedTime();
+      savePreferences();
     } catch (e) {
       print('Error fetching data: $e');
       showErrorDialog('لطفا دوباره امتحان کنید');
@@ -77,13 +69,16 @@ class _CurrencyScreenState extends State<CurrencyScreen> {
 
   void savePreferences() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<String> pinnedCurrenciesJson = pinnedIndexes.map((index) => jsonEncode(allCurrencies[index].toJson())).toList();
+    List<String> pinnedCurrenciesJson = pinnedIndexes
+        .map((index) => jsonEncode(allCurrencies[index].toJson()))
+        .toList();
     prefs.setStringList('pinnedCurrencies', pinnedCurrenciesJson);
   }
 
   void loadPreferences() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
-    List<String>? pinnedCurrenciesJson = prefs.getStringList('pinnedCurrencies');
+    List<String>? pinnedCurrenciesJson =
+        prefs.getStringList('pinnedCurrencies');
 
     if (pinnedCurrenciesJson != null) {
       setState(() {
@@ -319,9 +314,11 @@ class _CurrencyScreenState extends State<CurrencyScreen> {
                           style: TextStyle(color: Colors.white, fontSize: 20),
                         ),
                         Text(
-                          _toPersian('${formatter.yyyy}/${formatter.mm}/${formatter.dd}'),
+                          _toPersian(
+                              '${formatter.yyyy}/${formatter.mm}/${formatter.dd}'),
                           textAlign: TextAlign.center,
-                          style: const TextStyle(color: Colors.white, fontSize: 20),
+                          style: const TextStyle(
+                              color: Colors.white, fontSize: 20),
                         ),
                       ],
                     ),
@@ -345,7 +342,8 @@ class _CurrencyScreenState extends State<CurrencyScreen> {
                         Text(
                           _toPersian(lastUpdated),
                           textAlign: TextAlign.center,
-                          style: const TextStyle(color: Colors.white, fontSize: 20),
+                          style: const TextStyle(
+                              color: Colors.white, fontSize: 20),
                         ),
                       ],
                     ),
@@ -490,7 +488,7 @@ class CurrencyCard extends StatelessWidget {
                         Text(
                           currency.name,
                           style: const TextStyle(
-                              fontSize: 18,
+                              fontSize: 24,
                               fontWeight: FontWeight.bold,
                               color: Colors.white),
                         ),
@@ -500,8 +498,8 @@ class CurrencyCard extends StatelessWidget {
                             margin: const EdgeInsets.only(left: 8),
                             child: Icon(
                               Icons.push_pin,
-                              color: pinned ? Colors.blue : Colors.white,
-                              size: 20,
+                              color: pinned ? Colors.yellowAccent : Colors.white,
+                              size: 35,
                             ),
                           ),
                         ),
@@ -527,7 +525,8 @@ class CurrencyCard extends StatelessWidget {
                       color: Colors.white),
                 ),
                 Container(
-                  padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
                   decoration: BoxDecoration(
                     color: currency.change >= 0 ? Colors.green : Colors.red,
                     borderRadius: BorderRadius.circular(8),
@@ -555,7 +554,8 @@ class Currency {
   double change;
   String symbol;
 
-  Currency(this.index, this.code, this.name, this.price, this.change, this.symbol);
+  Currency(
+      this.index, this.code, this.name, this.price, this.change, this.symbol);
 
   Map<String, dynamic> toJson() {
     return {
